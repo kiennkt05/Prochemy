@@ -1,0 +1,38 @@
+# MBPP/77
+### Completion
+def is_Diff(n):
+    # Initialize sums for even and odd digits
+    sum_even = 0
+    sum_odd = 0
+    
+    # Convert the number to string to iterate through each digit
+    for digit in str(n):
+        # Convert the character back to an integer
+        num = int(digit)
+        
+        # Check if the digit is even or odd and update sums accordingly
+        if num % 2 == 0:
+            sum_even += num
+        else:
+            sum_odd += num
+            
+    # Calculate the difference
+    difference = sum_even - sum_odd
+    
+    # Return True if the difference is zero, otherwise False
+    return difference == 0
+
+# Test case
+assert is_Diff(12345) == False  # The difference is 2 (even: 2, 4; odd: 1, 3, 5)
+### Test
+
+
+METADATA = {
+    'author': 'mbpp',
+    'dataset': 'mbpp'
+}
+
+def check(candidate):
+    assert is_Diff (12345) == False
+    assert is_Diff(1212112) == True
+    assert is_Diff(1212) == False

@@ -41,7 +41,8 @@ def load_jsonl(file_path):
 
 def GEN_ANSWER(prompt):
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        # model="gpt-3.5-turbo",
+        model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": task_describe},
             {"role": "user", "content": information + prompt + format_instructions}

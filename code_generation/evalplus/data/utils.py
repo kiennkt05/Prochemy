@@ -56,6 +56,10 @@ def write_jsonl(
     else:
         mode = "wb"
     filename = os.path.expanduser(filename)
+    # Ensure parent directory exists
+    parent_dir = os.path.dirname(filename)
+    if parent_dir and not os.path.exists(parent_dir):
+        os.makedirs(parent_dir, exist_ok=True)
     if filename.endswith(".gz"):
         with open(filename, mode) as fp:
             with gzip.GzipFile(fileobj=fp, mode="wb") as gzfp:

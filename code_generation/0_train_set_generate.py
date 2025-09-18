@@ -1,12 +1,12 @@
 import os
 import json
 import re
-import httpx
+import httpx  # pyright: ignore[reportUnusedImport, reportMissingImports]
 import concurrent.futures
 from tqdm import tqdm
-from openai import OpenAI
+from openai import OpenAI # pyright: ignore[reportUnusedImport, reportMissingImports]
 import argparse 
-from dotenv import load_dotenv
+from dotenv import load_dotenv # pyright: ignore[reportUnusedImport, reportMissingImports]
 
 load_dotenv()
 
@@ -31,6 +31,13 @@ The reference data format is as follows:
 {"task_id": "HumanEval/2", "prompt": "\n\ndef truncate_number(number: float) -> float:\n    \"\"\" Given a positive floating point number, it can be decomposed into\n    and integer part (largest integer smaller than given number) and decimals\n    (leftover part always smaller than 1).\n\n    Return the decimal part of the number.\n    >>> truncate_number(3.5)\n    0.5\n    \"\"\"\n", "entry_point": "truncate_number", "canonical_solution": "    return number % 1.0\n", "test": "\n\nMETADATA = {\n    'author': 'jt',\n    'dataset': 'test'\n}\n\n\ndef check(candidate):\n    assert candidate(3.5) == 0.5\n    assert abs(candidate(1.33) - 0.33) < 1e-6\n    assert abs(candidate(123.456) - 0.456) < 1e-6\n"}
 """
 
+# prompt_template = """
+# The reference data format is as follows:
+# {"task_id": "MBPP/1", "prompt": "def min_cost(cost, m, n): \r\n    \"\"\"\r\n    Write a function to find the minimum cost path to reach (m, n) from (0, 0) for the given cost matrix cost[][] and a position (m, n) in cost[][].\r\n    assert min_cost([[1, 2, 3], [4, 8, 2], [1, 5, 3]], 2, 2) == 8\r\n    \"\"\"", "entry_point": "min_cost", "canonical_solution": "R = 3\r\nC = 3\r\ndef min_cost(cost, m, n): \r\n\ttc = [[0 for x in range(C)] for x in range(R)] \r\n\ttc[0][0] = cost[0][0] \r\n\tfor i in range(1, m+1): \r\n\t\ttc[i][0] = tc[i-1][0] + cost[i][0] \r\n\tfor j in range(1, n+1): \r\n\t\ttc[0][j] = tc[0][j-1] + cost[0][j] \r\n\tfor i in range(1, m+1): \r\n\t\tfor j in range(1, n+1): \r\n\t\t\ttc[i][j] = min(tc[i-1][j-1], tc[i-1][j], tc[i][j-1]) + cost[i][j] \r\n\treturn tc[m][n]", "test": "\n\nMETADATA = {\n    'author': 'mbpp',\n    'dataset': 'mbpp'\n}\n\ndef check(candidate):\n    assert min_cost([[1, 2, 3], [4, 8, 2], [1, 5, 3]], 2, 2) == 8\n    assert min_cost([[2, 3, 4], [5, 9, 3], [2, 6, 4]], 2, 2) == 12\n    assert min_cost([[3, 4, 5], [6, 10, 4], [3, 7, 5]], 2, 2) == 16\n"}
+# {"task_id": "MBPP/2", "prompt": "def similar_elements(test_tup1, test_tup2):\r\n    \"\"\"\r\n    Write a function to find the similar elements from the given two tuple lists.\r\n    assert similar_elements((3, 4, 5, 6),(5, 7, 4, 10)) == (4, 5)\r\n    \"\"\"", "entry_point": "similar_elements", "canonical_solution": "def similar_elements(test_tup1, test_tup2):\r\n  res = tuple(set(test_tup1) & set(test_tup2))\r\n  return (res) ", "test": "\n\nMETADATA = {\n    'author': 'mbpp',\n    'dataset': 'mbpp'\n}\n\ndef check(candidate):\n    assert similar_elements((3, 4, 5, 6),(5, 7, 4, 10)) == (4, 5)\n    assert similar_elements((1, 2, 3, 4),(5, 4, 3, 7)) == (3, 4)\n    assert similar_elements((11, 12, 14, 13),(17, 15, 14, 13)) == (13, 14)\n"}
+# {"task_id": "MBPP/3", "prompt": "def is_not_prime(n):\r\n    \"\"\"\r\n    Write a python function to identify non-prime numbers.\r\n    assert is_not_prime(2) == False\r\n    \"\"\"", "entry_point": "is_not_prime", "canonical_solution": "import math\r\ndef is_not_prime(n):\r\n    result = False\r\n    for i in range(2,int(math.sqrt(n)) + 1):\r\n        if n % i == 0:\r\n            result = True\r\n    return result", "test": "\n\nMETADATA = {\n    'author': 'mbpp',\n    'dataset': 'mbpp'\n}\n\ndef check(candidate):\n    assert is_not_prime(2) == False\n    assert is_not_prime(10) == True\n    assert is_not_prime(35) == True\n"}
+# """
+
 format_instructions = """
 Ensure that the data you provide is consistent with the reference data format, and that all test cases included in the data are correct.
 Ensure that the generated data is different from the provided reference data.
@@ -39,7 +46,8 @@ Return the data in the same Json format as the reference data and wrapped the da
 
 def GEN_ANSWER(prompt):
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        # model="gpt-3.5-turbo",
+        model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": task_describe},
             {"role": "user", "content": information + prompt + format_instructions}

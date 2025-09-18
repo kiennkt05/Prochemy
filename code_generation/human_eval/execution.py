@@ -20,6 +20,10 @@ def check_correctness(problem: Dict, completion: str, timeout: float,
         the results later even if execution finishes asynchronously.
     """
 
+    # For Windows, use direct execution instead of multiprocessing
+    if platform.system() == 'Windows':
+        return _check_correctness_direct(problem, completion, timeout, completion_id)
+    
     def unsafe_execute():
 
         with create_tempdir():
@@ -38,14 +42,14 @@ def check_correctness(problem: Dict, completion: str, timeout: float,
             check_program = (
                 # humaneval
                 # 'from typing import List\n' +
-                problem["prompt"] + completion + "\n" +
-                problem["test"] + "\n" +
-                f"check({problem['entry_point']})"
-
-                # mbpp
-                # completion + "\n" +
+                # problem["prompt"] + completion + "\n" +
                 # problem["test"] + "\n" +
                 # f"check({problem['entry_point']})"
+
+                # mbpp
+                completion + "\n" +
+                problem["test"] + "\n" +
+                f"check({problem['entry_point']})"
             )
 
             try:
@@ -62,7 +66,7 @@ def check_correctness(problem: Dict, completion: str, timeout: float,
 # information on how OpenAI sandboxes its code, see the accompanying paper.
 # Once you have read this disclaimer and taken appropriate precautions, 
 # uncomment the following line and proceed at your own risk:
-#                         exec(check_program, exec_globals)
+                        exec(check_program, exec_globals)
                         result.append("passed")
             except TimeoutException:
                 result.append("timed out")
@@ -77,11 +81,19 @@ def check_correctness(problem: Dict, completion: str, timeout: float,
     manager = multiprocessing.Manager()
     result = manager.list()
 
-    p = multiprocessing.Process(target=unsafe_execute)
-    p.start()
-    p.join(timeout=timeout + 1)
-    if p.is_alive():
-        p.kill()
+    try:
+        p = multiprocessing.Process(target=unsafe_execute)
+        p.start()
+        p.join(timeout=timeout + 1)
+        if p.is_alive():
+            p.kill()
+    except Exception as e:
+        # Fallback to direct execution if multiprocessing fails (e.g., on Windows)
+        print(f"Multiprocessing failed ({e}), falling back to direct execution...")
+        try:
+            unsafe_execute()
+        except Exception as exec_error:
+            result.append(f"failed: {exec_error}")
 
     if not result:
         result.append("timed out")
@@ -94,16 +106,64 @@ def check_correctness(problem: Dict, completion: str, timeout: float,
     )
 
 
+def _check_correctness_direct(problem: Dict, completion: str, timeout: float,
+                             completion_id: Optional[int] = None) -> Dict:
+    """
+    Direct execution version for Windows compatibility
+    """
+    
+    # Construct the check program
+    check_program = (
+        completion + "\n" +
+        problem["test"] + "\n" +
+        f"check({problem['entry_point']})"
+    )
+    
+    try:
+        # Capture stdout/stderr
+        import sys
+        import io
+        old_stdout = sys.stdout
+        old_stderr = sys.stderr
+        sys.stdout = io.StringIO()
+        sys.stderr = io.StringIO()
+        
+        # Execute the program
+        exec_globals = {}
+        exec(check_program, exec_globals)
+        
+        result = "passed"
+        
+    except Exception as e:
+        result = f"failed: {e}"
+    finally:
+        # Restore stdout/stderr
+        sys.stdout = old_stdout
+        sys.stderr = old_stderr
+    
+    return dict(
+        task_id=problem["task_id"],
+        passed=result == "passed",
+        result=result,
+        completion_id=completion_id,
+    )
+
+
 @contextlib.contextmanager
 def time_limit(seconds: float):
-    def signal_handler(signum, frame):
-        raise TimeoutException("Timed out!")
-    signal.setitimer(signal.ITIMER_REAL, seconds)
-    signal.signal(signal.SIGALRM, signal_handler)
-    try:
+    # On Windows, signal handling is limited, so we'll use a simpler approach
+    if platform.system() == 'Windows':
+        # For Windows, we'll just yield without timeout (multiprocessing timeout handles it)
         yield
-    finally:
-        signal.setitimer(signal.ITIMER_REAL, 0)
+    else:
+        def signal_handler(signum, frame):
+            raise TimeoutException("Timed out!")
+        signal.setitimer(signal.ITIMER_REAL, seconds)
+        signal.signal(signal.SIGALRM, signal_handler)
+        try:
+            yield
+        finally:
+            signal.setitimer(signal.ITIMER_REAL, 0)
 
 
 @contextlib.contextmanager
@@ -175,12 +235,17 @@ def reliability_guard(maximum_memory_bytes: Optional[int] = None):
     with caution.
     """
 
-    if maximum_memory_bytes is not None:
-        import resource
-        resource.setrlimit(resource.RLIMIT_AS, (maximum_memory_bytes, maximum_memory_bytes))
-        resource.setrlimit(resource.RLIMIT_DATA, (maximum_memory_bytes, maximum_memory_bytes))
-        if not platform.uname().system == 'Darwin':
-            resource.setrlimit(resource.RLIMIT_STACK, (maximum_memory_bytes, maximum_memory_bytes))
+    # Only apply resource limits on Unix-like systems (not Windows)
+    if maximum_memory_bytes is not None and platform.system() != 'Windows':
+        try:
+            import resource
+            resource.setrlimit(resource.RLIMIT_AS, (maximum_memory_bytes, maximum_memory_bytes))
+            resource.setrlimit(resource.RLIMIT_DATA, (maximum_memory_bytes, maximum_memory_bytes))
+            if not platform.uname().system == 'Darwin':
+                resource.setrlimit(resource.RLIMIT_STACK, (maximum_memory_bytes, maximum_memory_bytes))
+        except ImportError:
+            # resource module not available (e.g., on Windows)
+            pass
 
     faulthandler.disable()
 

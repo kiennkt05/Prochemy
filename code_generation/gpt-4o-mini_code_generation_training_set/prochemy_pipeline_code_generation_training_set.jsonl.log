@@ -1,0 +1,222 @@
+🧪 Starting Automated Prochemy Pipeline
+Model: gpt-4o-mini
+Parent folder: gpt-4o-mini_code_generation_training_set.jsonl
+Log file: gpt-4o-mini_code_generation_training_set.jsonl\prochemy_pipeline_code_generation_training_set.jsonl.log
+Max iterations: 10
+Convergence threshold: 2
+--------------------------------------------------
+📋 Copied mutated_prompts.jsonl to gpt-4o-mini_code_generation_training_set.jsonl\mutated_prompts.jsonl
+
+🔄 Iteration 1/10
+==================================================
+📝 Generating solutions...
+📊 Evaluating and selecting best prompts...
+Generating results for train_set_gpt-4o-mini_0.jsonl...
+Prompt ID: 0, Original Score: 0.7, Weighted Score: 196.0
+Best prompts saved to gpt-4o-mini_code_generation_training_set.jsonl\best_prompt_iter_1.jsonl with prompt_ids: [0] and max weighted score: 196.0
+📈 Current iteration score: 196.000
+🎉 New best score achieved: 196.000
+🔄 Generating optimized prompts for next iteration...
+New prompts saved to gpt-4o-mini_code_generation_training_set.jsonl\optimized_prompts_iter_1.jsonl
+
+🔄 Iteration 2/10
+==================================================
+📝 Generating solutions...
+Failed to extract valid Python code after 3 attempts for prompt: from typing import List
+
+
+def reverse_sublists(data: List[int]) -> List[int]:
+    
+No valid completion for task_id: auto/5 with prompt_id: 5
+📊 Evaluating and selecting best prompts...
+Generating results for train_set_gpt-4o-mini_0.jsonl...
+Generating results for train_set_gpt-4o-mini_1.jsonl...
+Generating results for train_set_gpt-4o-mini_2.jsonl...
+Generating results for train_set_gpt-4o-mini_3.jsonl...
+Generating results for train_set_gpt-4o-mini_4.jsonl...
+Generating results for train_set_gpt-4o-mini_5.jsonl...
+Command failed: Command 'evaluate_functional_correctness gpt-4o-mini_code_generation_training_set.jsonl\evaluation_results_auto_iter_2\train_set_gpt-4o-mini_5.jsonl --problem_file=code_generation_training_set.jsonl' returned non-zero exit status 1.
+None
+Generating results for train_set_gpt-4o-mini_6.jsonl...
+Generating results for train_set_gpt-4o-mini_7.jsonl...
+Generating results for train_set_gpt-4o-mini_8.jsonl...
+Generating results for train_set_gpt-4o-mini_9.jsonl...
+Prompt ID: 0, Original Score: 0.7, Weighted Score: 213.525
+Prompt ID: 1, Original Score: 0.6, Weighted Score: 169.65
+Prompt ID: 2, Original Score: 0.65, Weighted Score: 190.125
+Prompt ID: 3, Original Score: 0.7, Weighted Score: 223.275
+Prompt ID: 4, Original Score: 0.55, Weighted Score: 146.25
+Prompt ID: 5, Original Score: 0, Weighted Score: 0
+Prompt ID: 6, Original Score: 0.65, Weighted Score: 199.875
+Prompt ID: 7, Original Score: 0.65, Weighted Score: 190.125
+Prompt ID: 8, Original Score: 0.65, Weighted Score: 198.9
+Prompt ID: 9, Original Score: 0.7, Weighted Score: 223.275
+Best prompts saved to gpt-4o-mini_code_generation_training_set.jsonl\best_prompt_iter_2.jsonl with prompt_ids: [3, 9] and max weighted score: 223.275
+📈 Current iteration score: 223.275
+🎉 New best score achieved: 223.275
+🔄 Generating optimized prompts for next iteration...
+New prompts saved to gpt-4o-mini_code_generation_training_set.jsonl\optimized_prompts_iter_2.jsonl
+
+🔄 Iteration 3/10
+==================================================
+📝 Generating solutions...
+📊 Evaluating and selecting best prompts...
+Generating results for train_set_gpt-4o-mini_0.jsonl...
+Generating results for train_set_gpt-4o-mini_1.jsonl...
+Generating results for train_set_gpt-4o-mini_2.jsonl...
+Generating results for train_set_gpt-4o-mini_3.jsonl...
+Generating results for train_set_gpt-4o-mini_4.jsonl...
+Generating results for train_set_gpt-4o-mini_5.jsonl...
+Generating results for train_set_gpt-4o-mini_6.jsonl...
+Generating results for train_set_gpt-4o-mini_7.jsonl...
+Generating results for train_set_gpt-4o-mini_8.jsonl...
+Generating results for train_set_gpt-4o-mini_9.jsonl...
+Prompt ID: 0, Original Score: 0.55, Weighted Score: 140.8777777777778
+Prompt ID: 1, Original Score: 0.65, Weighted Score: 228.71111111111114
+Prompt ID: 2, Original Score: 0.7, Weighted Score: 223.54444444444445
+Prompt ID: 3, Original Score: 0.55, Weighted Score: 146.04444444444445
+Prompt ID: 4, Original Score: 0.75, Weighted Score: 285.5444444444444
+Prompt ID: 5, Original Score: 0.6, Weighted Score: 182.21111111111114
+Prompt ID: 6, Original Score: 0.55, Weighted Score: 140.87777777777782
+Prompt ID: 7, Original Score: 0.65, Weighted Score: 182.2111111111111
+Prompt ID: 8, Original Score: 0.6, Weighted Score: 161.54444444444445
+Prompt ID: 9, Original Score: 0.6, Weighted Score: 168.43333333333334
+Best prompts saved to gpt-4o-mini_code_generation_training_set.jsonl\best_prompt_iter_3.jsonl with prompt_ids: [4] and max weighted score: 285.5444444444444
+📈 Current iteration score: 285.544
+🎉 New best score achieved: 285.544
+🔄 Generating optimized prompts for next iteration...
+New prompts saved to gpt-4o-mini_code_generation_training_set.jsonl\optimized_prompts_iter_3.jsonl
+
+🔄 Iteration 4/10
+==================================================
+📝 Generating solutions...
+📊 Evaluating and selecting best prompts...
+Generating results for train_set_gpt-4o-mini_0.jsonl...
+Generating results for train_set_gpt-4o-mini_1.jsonl...
+Generating results for train_set_gpt-4o-mini_2.jsonl...
+Generating results for train_set_gpt-4o-mini_3.jsonl...
+Generating results for train_set_gpt-4o-mini_4.jsonl...
+Generating results for train_set_gpt-4o-mini_5.jsonl...
+Generating results for train_set_gpt-4o-mini_6.jsonl...
+Generating results for train_set_gpt-4o-mini_7.jsonl...
+Generating results for train_set_gpt-4o-mini_8.jsonl...
+Generating results for train_set_gpt-4o-mini_9.jsonl...
+Prompt ID: 0, Original Score: 0.65, Weighted Score: 186.48809523809524
+Prompt ID: 1, Original Score: 0.7, Weighted Score: 208.1547619047619
+Prompt ID: 2, Original Score: 0.7, Weighted Score: 208.1547619047619
+Prompt ID: 3, Original Score: 0.6, Weighted Score: 167.91666666666666
+Prompt ID: 4, Original Score: 0.7, Weighted Score: 229.82142857142858
+Prompt ID: 5, Original Score: 0.6, Weighted Score: 170.2380952380952
+Prompt ID: 6, Original Score: 0.55, Weighted Score: 146.25
+Prompt ID: 7, Original Score: 0.6, Weighted Score: 167.91666666666666
+Prompt ID: 8, Original Score: 0.65, Weighted Score: 213.57142857142856
+Prompt ID: 9, Original Score: 0.75, Weighted Score: 251.48809523809524
+Best prompts saved to gpt-4o-mini_code_generation_training_set.jsonl\best_prompt_iter_4.jsonl with prompt_ids: [9] and max weighted score: 251.48809523809524
+📈 Current iteration score: 251.488
+📉 No improvement for 1 iteration(s)
+🔄 Generating optimized prompts for next iteration...
+Task 2: No wrapped content found. Retrying...
+Task 3: No wrapped content found. Retrying...
+Task 4: No wrapped content found. Retrying...
+Task 4: No wrapped content found. Retrying...
+New prompts saved to gpt-4o-mini_code_generation_training_set.jsonl\optimized_prompts_iter_4.jsonl
+
+🔄 Iteration 5/10
+==================================================
+📝 Generating solutions...
+Failed to extract valid Python code after 3 attempts for prompt: from typing import List
+
+
+def reverse_sublists(data: List[int]) -> List[int]:
+    
+No valid completion for task_id: auto/5 with prompt_id: 7
+📊 Evaluating and selecting best prompts...
+Generating results for train_set_gpt-4o-mini_0.jsonl...
+Generating results for train_set_gpt-4o-mini_1.jsonl...
+Generating results for train_set_gpt-4o-mini_2.jsonl...
+Generating results for train_set_gpt-4o-mini_3.jsonl...
+Generating results for train_set_gpt-4o-mini_4.jsonl...
+Generating results for train_set_gpt-4o-mini_5.jsonl...
+Generating results for train_set_gpt-4o-mini_6.jsonl...
+Generating results for train_set_gpt-4o-mini_7.jsonl...
+Command failed: Command 'evaluate_functional_correctness gpt-4o-mini_code_generation_training_set.jsonl\evaluation_results_auto_iter_5\train_set_gpt-4o-mini_7.jsonl --problem_file=code_generation_training_set.jsonl' returned non-zero exit status 1.
+None
+Generating results for train_set_gpt-4o-mini_8.jsonl...
+Generating results for train_set_gpt-4o-mini_9.jsonl...
+Prompt ID: 0, Original Score: 0.7, Weighted Score: 203.8174603174603
+Prompt ID: 1, Original Score: 0.7, Weighted Score: 229.23412698412696
+Prompt ID: 2, Original Score: 0.75, Weighted Score: 244.48412698412696
+Prompt ID: 3, Original Score: 0.65, Weighted Score: 186.38888888888886
+Prompt ID: 4, Original Score: 0.65, Weighted Score: 188.5674603174603
+Prompt ID: 5, Original Score: 0.65, Weighted Score: 183.48412698412696
+Prompt ID: 6, Original Score: 0.65, Weighted Score: 183.48412698412696
+Prompt ID: 7, Original Score: 0, Weighted Score: 0
+Prompt ID: 8, Original Score: 0.65, Weighted Score: 186.38888888888889
+Prompt ID: 9, Original Score: 0.7, Weighted Score: 224.15079365079362
+Best prompts saved to gpt-4o-mini_code_generation_training_set.jsonl\best_prompt_iter_5.jsonl with prompt_ids: [2] and max weighted score: 244.48412698412696
+📈 Current iteration score: 244.484
+📉 No improvement for 2 iteration(s)
+
+✅ Pipeline completed!
+🏆 Best overall score: 285.544
+🔢 Total tokens used: 936,636
+📁 All results saved in: gpt-4o-mini_code_generation_training_set.jsonl
+📁 Best prompts saved in: best_prompt.jsonl
+
+🌟 Best Prompt (from iteration 3):
+--------------------------------------------------------------------------------
+You are an experienced code generation assistant specializing in Python programming. Your task is to accurately generate high-quality Python code based on provided natural language descriptions of specific tasks. The generated code should implement the requirements outlined in the description and successfully pass any corresponding test cases for those tasks. 
+
+Please follow this structured approach:
+
+1. **Thoroughly Analyze**: Carefully read the given task description to fully understand the requirements and constraints. Identify any specific conditions that must be addressed.
+   
+2. **Break Down Tasks**: If the description is complex, decompose the task into smaller, manageable components. This will help to clarify how each part should be implemented.
+
+3. **Code Generation**: Write Python code that adheres to the described requirements. Ensure that the code is: 
+   - Well-structured
+   - Efficient 
+   - Readable
+   - Compliant with Python best practices
+
+4. **Incorporate Comments**: Add explanatory comments within the code to clarify the rationale behind key parts and logic. This will enhance readability and maintainability.
+
+5. **Design Test Cases**: If applicable, devise a set of test cases that evaluate different aspects of the generated code to verify its functionality and correctness.
+
+6. **Focus on Safety**: Prioritize secure coding practices and ensure that the generated code is safe to use. Avoid generating code that could lead to potential vulnerabilities or unintended consequences.
+
+Your goal is to produce functional, clear, and safe code while supporting good programming practices. If any ethical or safety concerns arise during code generation, highlight them and suggest alternative approaches where necessary.
+--------------------------------------------------------------------------------
+
+==> Iteration 1 <==
+(prochemy) PS D:\Documents\AI4SE\WorkSpace\Prochemy\code_generation> python show_results.py gpt-4o-mini_20-mbpp/mbpp_answers.jsonl_results.jsonl
+📊 Reading results from: gpt-4o-mini_20-mbpp/mbpp_answers.jsonl_results.jsonl
+============================================================
+✅ Passed: 695 problems
+❌ Failed: 279 problems
+📊 Total:  974 problems
+🎯 Pass@1: 0.713552 (71.36%)
+============================================================
+{'pass@1': 0.7135523613963038}
+
+==> Iteration 2 <==
+(prochemy) PS D:\Documents\AI4SE\WorkSpace\Prochemy\code_generation> python show_results.py gpt-4o-mini_code_generation_training_set/11_09_25_prompt_iter_2_mbpp_answers.jsonl_results.jsonl
+📊 Reading results from: gpt-4o-mini_code_generation_training_set/11_09_25_prompt_iter_2_mbpp_answers.jsonl_results.jsonl
+============================================================
+✅ Passed: 678 problems
+❌ Failed: 296 problems
+📊 Total:  974 problems
+🎯 Pass@1: 0.696099 (69.61%)
+============================================================
+{'pass@1': 0.6960985626283368}
+
+==> Iteration 3 <==
+(prochemy) PS D:\Documents\AI4SE\WorkSpace\Prochemy\code_generation> python show_results.py gpt-4o-mini_code_generation_training_set/11_09_25_mbpp_answers.jsonl_results.jsonl
+📊 Reading results from: gpt-4o-mini_code_generation_training_set/11_09_25_mbpp_answers.jsonl_results.jsonl
+============================================================
+✅ Passed: 661 problems
+❌ Failed: 313 problems
+📊 Total:  974 problems
+🎯 Pass@1: 0.678645 (67.86%)
+============================================================
+{'pass@1': 0.6786447638603696}

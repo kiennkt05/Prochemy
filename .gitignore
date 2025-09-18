@@ -1,0 +1,38 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Env/Secrets
+.env
+*.env
+*.key
+*.pem
+
+# Logs and large artifacts
+# *.log
+# *.csv
+# *.xlsx
+# *.html
+
+# Results/datasets/artifacts (adjust as needed)
+# code_generation/Dataset/
+# code_generation/*_answers*.jsonl
+# code_generation/*_results*.jsonl
+# gpt-4o*/ 
+# o4-mini*/
+# *.jsonl
+
+# Caches
+.cache/

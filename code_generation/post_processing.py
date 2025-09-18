@@ -10,9 +10,8 @@ import json
 # )
 
 # Load the Python parser
-PY_LANGUAGE = Language(tspython.language(), "python")
-parser = Parser()
-parser.set_language(PY_LANGUAGE)
+PY_LANGUAGE = Language(tspython.language())
+parser = Parser(PY_LANGUAGE)
 
 import os
 import pathlib
@@ -124,8 +123,7 @@ def has_return_statement(node: Node) -> bool:
 def sanitize(code: str, entrypoint: Optional[str] = None) -> str:
     code = code_extract(code)
     code_bytes = bytes(code, "utf8")
-    parser = Parser()
-    parser.set_language(PY_LANGUAGE)
+    parser = Parser(PY_LANGUAGE)
     tree = parser.parse(code_bytes)
     class_names = set()
     function_names = set()
@@ -274,10 +272,16 @@ def script(
     print(f"Check the sanitized files at {target_path}")
 
 
-def main():
+def main(file_path):
     # TODO: Post-process the specified file
-    script("humaneval_gpt3.5turbo_cot.jsonl")
+    script(file_path)
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser(description="Post-process model outputs to extract Python code")
+    parser.add_argument("--input", required=True, help="Input JSONL file with raw model outputs")
+    args = parser.parse_args()
+    file_path = args.input
+    print(f"Processing: {file_path}")
+    main(file_path)

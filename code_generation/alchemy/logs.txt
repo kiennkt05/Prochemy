@@ -1,0 +1,104 @@
+(prochemy) PS D:\Documents\AI4SE\WorkSpace\Prochemy> cd D:/Documents/AI4SE/WorkSpace/Prochemy/code_generation                                                                               
+>> python prompt_test_humaneval_ET.py --model gpt-4o-mini --prompt_file alchemy_optimized_prompt.jsonl  --dataset mbpp --output_path alchemy/alchemy_mbpp_answers.jsonl                     
+>> evaluate_functional_correctness alchemy/alchemy_mbpp_answers.jsonl --problem_file Dataset/updated_mbpp_format.jsonl                                                                      
+>> python show_results.py alchemy/alchemy_mbpp_answers.jsonl_results.jsonl
+🤖 Using model: gpt-4o-mini
+📝 Loaded prompt from: alchemy_optimized_prompt.jsonl
+📏 Prompt length: 529 characters
+📊 Loading dataset: Dataset/updated_mbpp_format.jsonl
+🚀 Processing 974 problems with 10 workers...
+Processing tasks:  58%|███████████████████████████████████████████████████████████████████████████▍                                                      | 565/974 [09:41<06:01,  1.13it/s]Failed to extract valid Python code after 5 attempts for prompt: """
+Write a function to calculate a grid of hexagon coordinates where function returns a list of lists containing 6 tuples of x, y point coordinates.
+assert calculate_polygons(1,1, 4, 4, 3)==[[(-5.0, -4.196152422706632), (-5.0, -0.7320508075688767), (-2.0, 1.0), (1.0, -0.7320508075688767), (1.0, -4.196152422706632), (-2.0, -5.928203230275509), (-5.0, -4.196152422706632)], [(1.0, -4.196152422706632), (1.0, -0.7320508075688767), (4.0, 1.0), (7.0, -0.7320508075688767), (7.0, -4.196152422706632), (4.0, -5.928203230275509), (1.0, -4.196152422706632)], [(7.0, -4.196152422706632), (7.0, -0.7320508075688767), (10.0, 1.0), (13.0, -0.7320508075688767), (13.0, -4.196152422706632), (10.0, -5.928203230275509), (7.0, -4.196152422706632)], [(-2.0, 1.0000000000000004), (-2.0, 4.464101615137755), (1.0, 6.196152422706632), (4.0, 4.464101615137755), (4.0, 1.0000000000000004), (1.0, -0.7320508075688767), (-2.0, 1.0000000000000004)], [(4.0, 1.0000000000000004), (4.0, 4.464101615137755), (7.0, 6.196152422706632), (10.0, 4.464101615137755), (10.0, 1.0000000000000004), (7.0, -0.7320508075688767), (4.0, 1.0000000000000004)], [(-5.0, 6.196152422706632), (-5.0, 9.660254037844387), (-2.0, 11.392304845413264), (1.0, 9.660254037844387), (1.0, 6.196152422706632), (-2.0, 4.464101615137755), (-5.0, 6.196152422706632)], [(1.0, 6.196152422706632), (1.0, 9.660254037844387), (4.0, 11.392304845413264), (7.0, 9.660254037844387), (7.0, 6.196152422706632), (4.0, 4.464101615137755), (1.0, 6.196152422706632)], [(7.0, 6.196152422706632), (7.0, 9.660254037844387), (10.0, 11.392304845413264), (13.0, 9.660254037844387), (13.0, 6.196152422706632), (10.0, 4.464101615137755), (7.0, 6.196152422706632)], [(-2.0, 11.392304845413264), (-2.0, 14.85640646055102), (1.0, 16.588457268119896), (4.0, 14.85640646055102), (4.0, 11.392304845413264), (1.0, 9.660254037844387), (-2.0, 11.392304845413264)], [(4.0, 11.392304845413264), (4.0, 14.85640646055102), (7.0, 16.588457268119896), (10.0, 14.85640646055102), (10.0, 11.392304845413264), (7.0, 9.660254037844387), (4.0, 11.392304845413264)]]
+"""
+Response: To solve the problem of generating a grid of hexagon coordinates, we need to create a function that calculates the vertices of hexagons based on specified parameters. Each hexagon will be defined by its center coordinates, and we will generate a grid of these hexagons based on the specified number of rows and columns.
+
+### Explanation of the Code
+
+1. **Hexagon Geometry**: A regular hexagon can be divided into six equilateral triangles. The coordinates of the vertices can be calculated using trigonometric functions. The angle between each vertex is 60 degrees (or π/3 radians).
+
+2. **Parameters**:
+   - `start_x` and `start_y`: The starting coordinates for the grid.
+   - `rows` and `cols`: The number of rows and columns of hexagons to generate.
+   - `size`: The distance from the center of the hexagon to any vertex (the radius).
+
+3. **Hexagon Vertex Calculation**: For each hexagon, we calculate the coordinates of its vertices using the following formula:
+   - For each vertex `i` (from 0 to 5):
+     - \( x = center_x + size \cdot \cos(\theta) \)
+     - \( y = center_y + size \cdot \sin(\theta) \)
+   - Where \( \theta = \frac{\pi}{3} \cdot i \).
+
+4. **Grid Generation**: We iterate through the specified number of rows and columns, calculating the center of each hexagon based on its position in the grid. The x-coordinate is adjusted by the width of the hexagon, and the y-coordinate is adjusted by the height.
+
+5. **Return Value**: The function returns a list of lists, where each inner list contains the coordinates of the vertices of a hexagon.
+
+Here is the implementation of the function:
+
+```python
+import math
+
+def calculate_polygons(start_x, start_y, rows, cols, size):
+    hexagons = []
+    for row in range(rows):
+        hex_row = []
+        for col in range(cols):
+            # Calculate the center of the hexagon
+            x = start_x + col * size * 1.5  # Horizontal distance between hexagon centers
+            y = start_y + row * size * math.sqrt(3)  # Vertical distance between hexagon centers
+
+            # Adjust y for odd rows
+            if col % 2 == 1:
+                y += size * math.sqrt(3) / 2
+
+            # Calculate the vertices of the hexagon
+            vertices = []
+            for i in range(6):
+                angle = math.pi / 3 * i
+                vertex_x = x + size * math.cos(angle)
+                vertex_y = y + size * math.sin(angle)
+                vertices.append((vertex_x, vertex_y))
+
+            hex_row.append(vertices)
+        hexagons.append(hex_row)
+
+    # Flatten the list of lists to match the expected output format
+    return [hex for row in hexagons for hex in row]
+
+# Test the function with the provided assertion
+assert calculate_polygons(1, 1, 4, 4, 3) == [[(-5.0, -4.196152422706632), (-5.0, -0.7320508075688767), (-2.0, 1.0), (1.0, -0.7320508075688767), (1.0, -4.196152422706632), (-2.0, -5.928203230275509), (-5.0, -4.196152422706632)], [(1.0, -4.196152422706632), (1.0, -0.7320508075688767), (4.0, 1.0), (7.0, -0.7320508075688767), (7.0, -4.196152422706632), (4.0, -5.928203230275509), (1.0, -4.196152422706632)], [(7.0, -4.196152422706632), (7.0, -0.7320508075688767), (10.0, 1.0), (13.0, -0.7320508075688767), (13.0, -4.196152422706632), (10.0, -5.928203230275509), (7.0, -4.196152422706632)], [(-2.0, 1.0000000000000004), (-2.0, 4.464101615137755), (1.0, 6.196152422706632), (4.0, 4.
+Processing tasks: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 974/974 [16:43<00:00,  1.03s/it] 
+💾 Saving results to: alchemy/alchemy_mbpp_answers.jsonl
+✅ Completed! Generated 974 solutions.
+Reading samples...
+974it [00:00, 2850.52it/s]
+📊 Reading results from: alchemy/alchemy_mbpp_answers.jsonl_results.jsonl
+============================================================
+✅ Passed: 714 problems
+❌ Failed: 260 problems
+📊 Total:  974 problems
+🎯 Pass@1: 0.733060 (73.31%)
+============================================================
+{'pass@1': 0.7330595482546202}
+
+(prochemy) PS D:\Documents\AI4SE\WorkSpace\Prochemy> cd D:/Documents/AI4SE/WorkSpace/Prochemy/code_generation
+>> python prompt_test_humaneval_ET.py --model gpt-4o-mini --prompt_file alchemy/alchemy_optimized_prompt.jsonl  --dataset humaneval --output_path alchemy/alchemy_humaneval_answers.jsonl
+>> evaluate_functional_correctness alchemy/alchemy_humaneval_answers.jsonl --problem_file Dataset/human-eval-v2-20210705.jsonl
+>> python show_results.py alchemy/alchemy_humaneval_answers.jsonl_results.jsonl
+🤖 Using model: gpt-4o-mini
+📝 Loaded prompt from: alchemy/alchemy_optimized_prompt.jsonl
+📏 Prompt length: 529 characters
+📊 Loading dataset: Dataset/human-eval-v2-20210705.jsonl
+🚀 Processing 164 problems with 10 workers...
+Processing tasks: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 164/164 [03:50<00:00,  1.40s/it]
+💾 Saving results to: alchemy/alchemy_humaneval_answers.jsonl
+✅ Completed! Generated 164 solutions.
+Reading samples...
+164it [00:00, 1408.29it/s]
+📊 Reading results from: alchemy/alchemy_humaneval_answers.jsonl_results.jsonl
+============================================================
+✅ Passed: 145 problems
+❌ Failed: 19 problems
+📊 Total:  164 problems
+🎯 Pass@1: 0.884146 (88.41%)
+============================================================
+{'pass@1': 0.8841463414634146}

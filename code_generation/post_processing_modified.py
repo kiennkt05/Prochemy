@@ -298,8 +298,21 @@ def script(
 
 
 def main():
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Post-process model outputs to extract Python code")
+    parser.add_argument("--input", required=True, help="Input JSONL file with raw model outputs")
+    parser.add_argument("--output", required=True, help="Output JSONL file with cleaned code")
+    
+    args = parser.parse_args()
+    
+    print(f"📝 Processing: {args.input}")
+    print(f"💾 Output: {args.output}")
+    
     # TODO: Post-process the specified file
-    script("humaneval_gpt3.5turbo_cot.jsonl")
+    script(args.input)
+    
+    print(f"✅ Post-processing completed!")
 
 
 if __name__ == "__main__":
