@@ -1,0 +1,174 @@
+🧪 Starting Automated Prochemy Pipeline
+Model: gpt-4o-mini
+Parent folder: gpt-4o-mini_code_generation_training_set
+Log file: gpt-4o-mini_code_generation_training_set\prochemy_pipeline_code_generation_training_set.log
+Max iterations: 10
+Convergence threshold: 3
+--------------------------------------------------
+📋 Copied mutated_prompts.jsonl to gpt-4o-mini_code_generation_training_set\mutated_prompts.jsonl
+
+🔄 Iteration 1/10
+==================================================
+📝 Generating solutions...
+📊 Evaluating and selecting best prompts...
+Task weights: {'auto/6': 1.0, 'auto/2': 1.0, 'auto/1': 1.0, 'auto/4': 1.0, 'auto/8': 1.0, 'auto/0': 1.0, 'HumanEval/41': 1.0, 'HumanEval/77': 1.0, 'HumanEval/10': 1.0, 'HumanEval/84': 1.0, 'HumanEval/32': 1.0, 'HumanEval/94': 1.0}
+Prompt ID: 0, Original Score: 0.6, Weighted Score: 12.0
+Best prompts saved to gpt-4o-mini_code_generation_training_set\best_prompt\iter_1.jsonl with prompt_ids: [0] and max weighted score: 12.0
+📈 Current iteration score: 12.000
+🎉 New best score achieved: 12.000
+🔄 Generating optimized prompts for next iteration...
+New prompts saved to gpt-4o-mini_code_generation_training_set\optimized_prompts\iter_1.jsonl
+
+🔄 Iteration 2/10
+==================================================
+📝 Generating solutions...
+Failed to extract valid Python code after 3 attempts for prompt: from typing import List
+
+
+def count_consecutive_zeros(nums: List[int]) -> int:
+    
+No valid completion for task_id: auto/1 with prompt_id: 4
+Failed to extract valid Python code after 3 attempts for prompt: from typing import List
+
+
+def find_missing_number(nums: List[int]) -> int:
+    
+No valid completion for task_id: auto/3 with prompt_id: 4
+Failed to extract valid Python code after 3 attempts for prompt: from typing import List
+
+
+def find_duplicates(numbers: List[float]) -> List[float]:
+    
+No valid completion for task_id: auto/4 with prompt_id: 4
+Failed to extract valid Python code after 3 attempts for prompt: from typing import List
+
+
+def find_duplicates(strings: List[str]) -> List[str]:
+    
+No valid completion for task_id: auto/0 with prompt_id: 4
+Failed to extract valid Python code after 3 attempts for prompt: from typing import List
+
+
+def reverse_sublists(data: List[int]) -> List[int]:
+    
+No valid completion for task_id: auto/5 with prompt_id: 4
+📊 Evaluating and selecting best prompts...
+Command failed: Command 'evaluate_functional_correctness gpt-4o-mini_code_generation_training_set\evaluation_results_auto\iter_2\train_set_gpt-4o-mini_4.jsonl --problem_file=code_generation_training_set.jsonl' returned non-zero exit status 1.
+None
+Task weights: {'auto/2': 1.1111111111111112, 'auto/4': 1.1111111111111112, 'auto/6': 1.1111111111111112, 'auto/8': 1.1111111111111112, 'auto/0': 2.5, 'auto/1': 1.1111111111111112, 'HumanEval/77': 1.1111111111111112, 'HumanEval/41': 1.1111111111111112, 'HumanEval/10': 1.25, 'HumanEval/84': 1.6666666666666667, 'HumanEval/32': 5.0, 'HumanEval/94': 1.1111111111111112, 'HumanEval/75': 5.0, 'HumanEval/83': 2.5, 'HumanEval/93': 5.0}
+Prompt ID: 0, Original Score: 0.6, Weighted Score: 19.305555555555554
+Prompt ID: 1, Original Score: 0.55, Weighted Score: 17.63888888888889
+Prompt ID: 2, Original Score: 0.5, Weighted Score: 11.805555555555554
+Prompt ID: 3, Original Score: 0.5, Weighted Score: 15.138888888888888
+Prompt ID: 4, Original Score: 0, Weighted Score: 0
+Prompt ID: 5, Original Score: 0.65, Weighted Score: 21.805555555555554
+Prompt ID: 6, Original Score: 0.5, Weighted Score: 13.888888888888888
+Prompt ID: 7, Original Score: 0.55, Weighted Score: 16.805555555555554
+Prompt ID: 8, Original Score: 0.6, Weighted Score: 19.305555555555554
+Prompt ID: 9, Original Score: 0.55, Weighted Score: 14.305555555555554
+Best prompts saved to gpt-4o-mini_code_generation_training_set\best_prompt\iter_2.jsonl with prompt_ids: [5] and max weighted score: 21.805555555555554
+📈 Current iteration score: 21.806
+🎉 New best score achieved: 21.806
+🔄 Generating optimized prompts for next iteration...
+New prompts saved to gpt-4o-mini_code_generation_training_set\optimized_prompts\iter_2.jsonl
+
+🔄 Iteration 3/10
+==================================================
+📝 Generating solutions...
+📊 Evaluating and selecting best prompts...
+Task weights: {'auto/2': 1.0, 'auto/0': 1.1111111111111112, 'auto/6': 1.0, 'auto/1': 1.0, 'auto/8': 1.0, 'auto/4': 1.0, 'HumanEval/10': 1.0, 'HumanEval/41': 1.0, 'HumanEval/77': 1.1111111111111112, 'HumanEval/84': 1.0, 'HumanEval/32': 1.4285714285714286, 'HumanEval/94': 1.25, 'HumanEval/65': 10.0, 'HumanEval/83': 2.0, 'HumanEval/93': 10.0}
+Prompt ID: 0, Original Score: 0.6, Weighted Score: 12.90079365079365
+Prompt ID: 1, Original Score: 0.6, Weighted Score: 12.90079365079365
+Prompt ID: 2, Original Score: 0.65, Weighted Score: 22.90079365079365
+Prompt ID: 3, Original Score: 0.6, Weighted Score: 13.65079365079365
+Prompt ID: 4, Original Score: 0.6, Weighted Score: 12.90079365079365
+Prompt ID: 5, Original Score: 0.65, Weighted Score: 23.47222222222222
+Prompt ID: 6, Original Score: 0.6, Weighted Score: 13.65079365079365
+Prompt ID: 7, Original Score: 0.55, Weighted Score: 11.78968253968254
+Prompt ID: 8, Original Score: 0.6, Weighted Score: 13.472222222222221
+Prompt ID: 9, Original Score: 0.55, Weighted Score: 12.36111111111111
+Best prompts saved to gpt-4o-mini_code_generation_training_set\best_prompt\iter_3.jsonl with prompt_ids: [5] and max weighted score: 23.47222222222222
+📈 Current iteration score: 23.472
+🎉 New best score achieved: 23.472
+🔄 Generating optimized prompts for next iteration...
+New prompts saved to gpt-4o-mini_code_generation_training_set\optimized_prompts\iter_3.jsonl
+
+🔄 Iteration 4/10
+==================================================
+📝 Generating solutions...
+📊 Evaluating and selecting best prompts...
+Task weights: {'auto/2': 1.0, 'auto/4': 1.0, 'auto/6': 1.0, 'auto/8': 1.0, 'auto/1': 1.0, 'HumanEval/41': 1.0, 'HumanEval/84': 1.1111111111111112, 'HumanEval/10': 1.0, 'HumanEval/77': 1.1111111111111112, 'HumanEval/83': 2.0, 'HumanEval/32': 1.4285714285714286, 'HumanEval/93': 10.0, 'auto/0': 1.4285714285714286, 'HumanEval/94': 2.0}
+Prompt ID: 0, Original Score: 0.55, Weighted Score: 12.65079365079365
+Prompt ID: 1, Original Score: 0.55, Weighted Score: 21.22222222222222
+Prompt ID: 2, Original Score: 0.6, Weighted Score: 14.65079365079365
+Prompt ID: 3, Original Score: 0.6, Weighted Score: 14.079365079365079
+Prompt ID: 4, Original Score: 0.55, Weighted Score: 12.079365079365079
+Prompt ID: 5, Original Score: 0.55, Weighted Score: 13.222222222222221
+Prompt ID: 6, Original Score: 0.6, Weighted Score: 14.079365079365079
+Prompt ID: 7, Original Score: 0.6, Weighted Score: 14.079365079365079
+Prompt ID: 8, Original Score: 0.6, Weighted Score: 14.079365079365079
+Prompt ID: 9, Original Score: 0.45, Weighted Score: 9.857142857142858
+Best prompts saved to gpt-4o-mini_code_generation_training_set\best_prompt\iter_4.jsonl with prompt_ids: [1] and max weighted score: 21.22222222222222
+📈 Current iteration score: 21.222
+📉 No improvement for 1 iteration(s)
+🔄 Generating optimized prompts for next iteration...
+New prompts saved to gpt-4o-mini_code_generation_training_set\optimized_prompts\iter_4.jsonl
+
+🔄 Iteration 5/10
+==================================================
+📝 Generating solutions...
+Failed to extract valid Python code after 3 attempts for prompt: from typing import List
+
+
+def reverse_sublists(data: List[int]) -> List[int]:
+    
+No valid completion for task_id: auto/5 with prompt_id: 5
+📊 Evaluating and selecting best prompts...
+Command failed: Command 'evaluate_functional_correctness gpt-4o-mini_code_generation_training_set\evaluation_results_auto\iter_5\train_set_gpt-4o-mini_5.jsonl --problem_file=code_generation_training_set.jsonl' returned non-zero exit status 1.
+None
+Task weights: {'auto/6': 1.1111111111111112, 'auto/1': 1.1111111111111112, 'auto/2': 1.1111111111111112, 'auto/8': 1.1111111111111112, 'auto/4': 1.1111111111111112, 'HumanEval/77': 1.1111111111111112, 'HumanEval/10': 1.1111111111111112, 'HumanEval/41': 1.1111111111111112, 'HumanEval/84': 1.1111111111111112, 'HumanEval/93': 10.0, 'HumanEval/94': 2.5, 'auto/0': 2.0, 'HumanEval/83': 2.0, 'HumanEval/32': 1.6666666666666667}
+Prompt ID: 0, Original Score: 0.55, Weighted Score: 22.5
+Prompt ID: 1, Original Score: 0.55, Weighted Score: 13.999999999999998
+Prompt ID: 2, Original Score: 0.65, Weighted Score: 18.166666666666668
+Prompt ID: 3, Original Score: 0.55, Weighted Score: 13.666666666666664
+Prompt ID: 4, Original Score: 0.5, Weighted Score: 11.666666666666664
+Prompt ID: 5, Original Score: 0, Weighted Score: 0
+Prompt ID: 6, Original Score: 0.55, Weighted Score: 13.666666666666664
+Prompt ID: 7, Original Score: 0.55, Weighted Score: 13.666666666666664
+Prompt ID: 8, Original Score: 0.65, Weighted Score: 18.166666666666664
+Prompt ID: 9, Original Score: 0.55, Weighted Score: 14.499999999999998
+Best prompts saved to gpt-4o-mini_code_generation_training_set\best_prompt\iter_5.jsonl with prompt_ids: [0] and max weighted score: 22.5
+📈 Current iteration score: 22.500
+📉 No improvement for 2 iteration(s)
+🔄 Generating optimized prompts for next iteration...
+New prompts saved to gpt-4o-mini_code_generation_training_set\optimized_prompts\iter_5.jsonl
+
+🔄 Iteration 6/10
+==================================================
+📝 Generating solutions...
+📊 Evaluating and selecting best prompts...
+Task weights: {'auto/2': 1.0, 'auto/6': 1.0, 'auto/1': 1.0, 'auto/4': 1.0, 'auto/8': 1.0, 'HumanEval/41': 1.0, 'HumanEval/93': 2.5, 'HumanEval/10': 1.0, 'HumanEval/32': 1.4285714285714286, 'HumanEval/84': 1.0, 'HumanEval/94': 1.25, 'auto/0': 1.6666666666666667, 'HumanEval/77': 1.1111111111111112, 'HumanEval/83': 1.6666666666666667}
+Prompt ID: 0, Original Score: 0.55, Weighted Score: 13.178571428571429
+Prompt ID: 1, Original Score: 0.6, Weighted Score: 13.694444444444445
+Prompt ID: 2, Original Score: 0.6, Weighted Score: 13.873015873015873
+Prompt ID: 3, Original Score: 0.55, Weighted Score: 13.277777777777779
+Prompt ID: 4, Original Score: 0.7, Weighted Score: 17.623015873015873
+Prompt ID: 5, Original Score: 0.65, Weighted Score: 15.956349206349206
+Prompt ID: 6, Original Score: 0.6, Weighted Score: 13.456349206349207
+Prompt ID: 7, Original Score: 0.6, Weighted Score: 13.456349206349206
+Prompt ID: 8, Original Score: 0.65, Weighted Score: 15.123015873015873
+Prompt ID: 9, Original Score: 0.5, Weighted Score: 10.36111111111111
+Best prompts saved to gpt-4o-mini_code_generation_training_set\best_prompt\iter_6.jsonl with prompt_ids: [4] and max weighted score: 17.623015873015873
+📈 Current iteration score: 17.623
+📉 No improvement for 3 iteration(s)
+
+✅ Pipeline completed!
+🏆 Best overall score: 23.472
+🔢 Total tokens used: 1,074,684
+📁 All results saved in: gpt-4o-mini_code_generation_training_set
+📁 Best prompts saved in: gpt-4o-mini_code_generation_training_set\best_prompt\best_prompt.jsonl
+
+🌟 Best Prompt (from iteration 3):
+--------------------------------------------------------------------------------
+You are a Python code generation assistant with the goal of transforming natural language descriptions into functional Python code. Your task is to carefully analyze the provided task description and generate a complete and efficient Python program that fulfills the specified requirements. Additionally, ensure that the code is well-structured, follows best practices in Python programming, and is capable of passing any relevant test cases that pertain to the task at hand. When crafting your code, please consider edge cases and potential errors, providing comments where necessary to enhance understanding. If applicable, include examples or test cases to validate the functionality of the generated code.
+--------------------------------------------------------------------------------

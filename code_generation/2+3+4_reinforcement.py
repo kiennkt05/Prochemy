@@ -155,6 +155,7 @@ def evaluate_and_select_best_prompts(folder_path, problem_file_path, prompts_fil
     base_command = f"evaluate_functional_correctness {{jsonl_file}} --problem_file={problem_file_path}"
 
     # Used to store the correct result count for each task_id
+    total_prompts = 0
     task_correct_counts = {}
     max_weighted_score = -1
     best_prompt_ids = []
@@ -179,6 +180,8 @@ def evaluate_and_select_best_prompts(folder_path, problem_file_path, prompts_fil
 
             # Read the generated results.jsonl file and calculate correct counts for each task_id
             if os.path.exists(result_file_path):
+                # Only count the prompts that have results
+                total_prompts += 1
                 with open(result_file_path, 'r') as result_file:
                     for line in result_file:
                         line = line.strip()  # Strip trailing whitespace
@@ -199,8 +202,10 @@ def evaluate_and_select_best_prompts(folder_path, problem_file_path, prompts_fil
                             task_correct_counts[task_id] = task_correct_counts.get(task_id, 0) + 1
 
     # Calculate weighted score for each task_id
-    total_tasks = sum(task_correct_counts.values())
-    task_weights = {task_id: total_tasks / count for task_id, count in task_correct_counts.items()}
+    # total_tasks = sum(task_correct_counts.values())
+    task_weights = {task_id: total_prompts / count for task_id, count in task_correct_counts.items()}
+    
+    # logger.info(f"Task weights: {task_weights}")
 
     # Recalculate weighted score and original score for each file
     prompt_scores = {}
@@ -363,14 +368,14 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description="Automated Prochemy Reinforcement Learning Pipeline")
     parser.add_argument("--model", default="gpt-4o-mini", help="Model name to use for generation")
-    parser.add_argument("--test_set_path", default="mbpp_code_generation_training_set.jsonl", help="Path to test set")
+    parser.add_argument("--test_set_path", default="code_generation_training_set.jsonl", help="Path to test set")
     parser.add_argument("--mutated_prompt_path", default="mutated_prompts.jsonl", help="Path to mutated prompts")
     parser.add_argument("--output_directory", default="evaluation_results_auto", help="Output directory for results")
     parser.add_argument("--prompts_file_path", default="mutated_prompts.jsonl", help="Prompts file path")
     parser.add_argument("--best_prompt_output_path", default="best_prompt.jsonl", help="Best prompt output path")
     parser.add_argument("--optimize_output_file", default="optimized_prompts_auto.jsonl", help="Optimized prompts output")
     parser.add_argument("--max_iterations", type=int, default=10, help="Maximum number of iterations")
-    parser.add_argument("--convergence_threshold", type=int, default=2, help="Convergence threshold")
+    parser.add_argument("--convergence_threshold", type=int, default=3, help="Convergence threshold")
     
     args = parser.parse_args()
     
@@ -405,7 +410,7 @@ if __name__ == "__main__":
     
     # Use the provided parameters and update paths to use parent folder
     test_set_path = args.test_set_path
-    mutated_prompt_path = os.path.join(parent_folder, args.mutated_prompt_path)
+    # mutated_prompt_path = os.path.join(parent_folder, args.mutated_prompt_path)
     output_directory = os.path.join(parent_folder, args.output_directory)
     problem_file_path = args.test_set_path
     prompts_file_path = os.path.join(parent_folder, args.prompts_file_path)

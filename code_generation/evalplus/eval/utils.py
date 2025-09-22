@@ -41,15 +41,19 @@ def swallow_io():
 
 @contextlib.contextmanager
 def time_limit(seconds: float):
-    def signal_handler(signum, frame):
-        raise TimeoutException("Timed out!")
-
-    signal.setitimer(signal.ITIMER_REAL, seconds)
-    signal.signal(signal.SIGALRM, signal_handler)
-    try:
+    # On Windows, signal handling is limited, so we'll use a simpler approach
+    if platform.system() == 'Windows':
+        # For Windows, we'll just yield without timeout (multiprocessing timeout handles it)
         yield
-    finally:
-        signal.setitimer(signal.ITIMER_REAL, 0)
+    else:
+        def signal_handler(signum, frame):
+            raise TimeoutException("Timed out!")
+        signal.setitimer(signal.ITIMER_REAL, seconds)
+        signal.signal(signal.SIGALRM, signal_handler)
+        try:
+            yield
+        finally:
+            signal.setitimer(signal.ITIMER_REAL, 0)
 
 
 @contextlib.contextmanager
