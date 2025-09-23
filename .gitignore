@@ -34,5 +34,7 @@ Thumbs.db
 # o4-mini*/
 # *.jsonl
 
+*.zip
+
 # Caches
 .cache/
